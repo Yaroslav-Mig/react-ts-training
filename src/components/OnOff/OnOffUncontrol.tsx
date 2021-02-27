@@ -7,7 +7,7 @@ type PropsType = {
 };
 
 export function OnOffUncontrol(props: PropsType) {
-  const [status, setStatus] = useState<boolean>(props.defaultValue ? props.defaultValue : false);
+  const [status, setStatus] = useState<boolean>(props.defaultValue ?? false);
   const onClick = () => {
     setStatus(true);
     props.onChange(true);

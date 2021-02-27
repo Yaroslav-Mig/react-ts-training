@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
+export type RatingValue = 0 | 1 | 2 | 3 | 4 | 5;
+
 type RatingProps = {
-  value: number;
-  onClick: (value: number) => void;
+  value: RatingValue;
+  onClick: (value: RatingValue) => void;
 };
 
 type StarProps = {
   selected: boolean;
-  value: number;
-  onClick: (value: number) => void;
+  value: RatingValue;
+  onClick: (value: RatingValue) => void;
 };
 
 export function Rating(props: RatingProps) {
