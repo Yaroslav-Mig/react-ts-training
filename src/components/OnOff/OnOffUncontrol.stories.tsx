@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { OnOffUncontrol } from './OnOffUncontrol';
 import { action } from '@storybook/addon-actions';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RatingUncontrol } from './RatingUncontrol';
 import { action } from '@storybook/addon-actions';
 

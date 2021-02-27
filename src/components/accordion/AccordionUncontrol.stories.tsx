@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AccordionUncontrol } from './AccordionUncontrol';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'AccordionUncontrol',
