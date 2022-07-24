@@ -12,7 +12,7 @@ function App() {
   const [ratingValue, setRatingValue] = useState<RatingValue>(0);
   const [collapsed, setCollapsed] = useState<boolean>(false);
 	const [toggle, setToggle] = useState(false);
-	
+
   return (
     <div className='app'>
       <PageTitle title='This is APP component' />
@@ -21,7 +21,7 @@ function App() {
       <Accordion title='Menu' collapsed={collapsed} setCollapsed={setCollapsed} />
       <RatingUncontrol/>
       <AccordionUncontrol title='Films' />
-      <OnOffUncontrol onChange={setToggle} />
+      <OnOffUncontrol/>
     </div>
   );
 }

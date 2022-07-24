@@ -1,5 +1,5 @@
 import React from 'react';
-import { setStyleBtn, indicatorStyleFn } from './OnOffStyle';
+import { styles } from './OnOffStyle';
 
 type PropsType = {
   status: boolean;
@@ -14,13 +14,13 @@ export function OnOff(props: PropsType) {
 
   return (
     <div>
-      <div style={setStyleBtn(props.status, flagOn)} onClick={onChange}>
+      <div style={styles.OnOff(props.status, flagOn)} onClick={onChange}>
         On
       </div>
-      <div style={setStyleBtn(props.status, flagOff)} onClick={offChange}>
+      <div style={styles.OnOff(props.status, flagOff)} onClick={offChange}>
         Off
       </div>
-      <div style={indicatorStyleFn(props.status)}></div>
+      <div style={styles.Indicator(props.status)}></div>
     </div>
   );
 }

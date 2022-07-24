@@ -1,33 +1,27 @@
 import React, { useState } from 'react';
-import { setStyleBtn, indicatorStyleFn } from './OnOffStyle';
+import { styles } from './OnOffStyle';
 
 type PropsType = {
-  onChange: (value: boolean) => void;
+  onChange?: (value: boolean) => void;
   defaultValue?: boolean;
 };
 
 export function OnOffUncontrol(props: PropsType) {
   const [status, setStatus] = useState<boolean>(props.defaultValue ?? false);
-  const onClick = () => {
-    setStatus(true);
-    props.onChange(true);
-  };
-  const offClick = () => {
-    setStatus(false);
-    props.onChange(false);
-  };
+  const onClick = () => setStatus(true);
+  const offClick = () =>  setStatus(false);
   const flagOn = true;
   const flagOff = false;
 
   return (
     <div>
-      <div style={setStyleBtn(status, flagOn)} onClick={onClick}>
+      <div style={styles.OnOff(status, flagOn)} onClick={onClick}>
         On
       </div>
-      <div style={setStyleBtn(status, flagOff)} onClick={offClick}>
+      <div style={styles.OnOff(status, flagOff)} onClick={offClick}>
         Off
       </div>
-      <div style={indicatorStyleFn(status)}></div>
+      <div style={styles.Indicator(status)}></div>
     </div>
   );
 }
