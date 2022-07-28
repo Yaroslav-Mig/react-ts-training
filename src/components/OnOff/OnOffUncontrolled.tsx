@@ -6,7 +6,7 @@ type PropsType = {
   setToggle?: (value: boolean) => void;
 };
 
-export function OnOffUncontrol(props: PropsType) {
+export function OnOffUncontrolled(props: PropsType) {
   const { toggle, setToggle } = props;
   const [status, setStatus] = useState<boolean>(toggle ?? false);
 
@@ -15,8 +15,8 @@ export function OnOffUncontrol(props: PropsType) {
     setToggle && setToggle(true);
   };
   const offClickHandler = () => {
-		setStatus(false);
-		setToggle && setToggle(false);
+    setStatus(false);
+    setToggle && setToggle(false);
   };
   return (
     <div>

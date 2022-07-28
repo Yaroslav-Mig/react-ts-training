@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RatingValue } from './Rating';
 
 type RatingPropsType = {
-  defaultValue?: RatingValue;
+  value?: RatingValue;
   onChange?: (value: RatingValue) => void;
 };
 type StarProps = {
@@ -10,8 +10,8 @@ type StarProps = {
   setRating: () => void;
 };
 
-export function RatingUncontrol(props: RatingPropsType) {
-  const { defaultValue, onChange } = props;
+export function RatingUncontrolled(props: RatingPropsType) {
+  const { value: defaultValue, onChange } = props;
   let [value, setValue] = useState<RatingValue>(0);
 
   const setRatingHandler = (value: RatingValue): (() => void) => {
