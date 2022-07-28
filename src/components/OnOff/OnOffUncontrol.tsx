@@ -2,23 +2,28 @@ import React, { useState } from 'react';
 import { styles } from './OnOffStyle';
 
 type PropsType = {
-  onChange?: (value: boolean) => void;
-  defaultValue?: boolean;
+  toggle?: boolean;
+  setToggle?: (value: boolean) => void;
 };
 
 export function OnOffUncontrol(props: PropsType) {
-  const [status, setStatus] = useState<boolean>(props.defaultValue ?? false);
-  const onClick = () => setStatus(true);
-  const offClick = () =>  setStatus(false);
-  const flagOn = true;
-  const flagOff = false;
+  const { toggle, setToggle } = props;
+  const [status, setStatus] = useState<boolean>(toggle ?? false);
 
+  const onClickHandler = () => {
+    setStatus(true);
+    setToggle && setToggle(true);
+  };
+  const offClickHandler = () => {
+		setStatus(false);
+		setToggle && setToggle(false);
+  };
   return (
     <div>
-      <div style={styles.OnOff(status, flagOn)} onClick={onClick}>
+      <div style={styles.OnOff(status, true)} onClick={onClickHandler}>
         On
       </div>
-      <div style={styles.OnOff(status, flagOff)} onClick={offClick}>
+      <div style={styles.OnOff(status, false)} onClick={offClickHandler}>
         Off
       </div>
       <div style={styles.Indicator(status)}></div>

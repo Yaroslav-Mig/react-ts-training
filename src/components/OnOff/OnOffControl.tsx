@@ -6,21 +6,20 @@ type PropsType = {
   setStatus: (value: boolean) => void;
 };
 
-export function OnOff(props: PropsType) {
-  const onChange = () => props.setStatus(true);
-  const offChange = () => props.setStatus(false);
-  const flagOn = true;
-  const flagOff = false;
+export function OnOff({ status, setStatus }: PropsType) {
+
+  const onChange = () => setStatus(true);
+  const offChangeHandler = () => setStatus(false);
 
   return (
     <div>
-      <div style={styles.OnOff(props.status, flagOn)} onClick={onChange}>
+      <div style={styles.OnOff(status, true)} onClick={onChange}>
         On
       </div>
-      <div style={styles.OnOff(props.status, flagOff)} onClick={offChange}>
+      <div style={styles.OnOff(status, false)} onClick={offChangeHandler}>
         Off
       </div>
-      <div style={styles.Indicator(props.status)}></div>
+      <div style={styles.Indicator(status)}></div>
     </div>
   );
 }
