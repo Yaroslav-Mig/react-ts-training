@@ -1,8 +1,13 @@
 import React from 'react';
 
+export type ItemType = {
+  id: string;
+  name: string;
+};
 type AccordionProps = {
   title: string;
   collapsed: boolean;
+  items: Array<ItemType>;
   setCollapsed: (value: boolean) => void;
 };
 type AccordionTitleProps = {
@@ -11,24 +16,29 @@ type AccordionTitleProps = {
 };
 
 export function Accordion(props: AccordionProps) {
-  const set = () => props.setCollapsed(!props.collapsed);
+  const { title, collapsed, items, setCollapsed } = props;
+  const collapsedHandler = () => setCollapsed(!collapsed);
+  console.dir(items);
+
+  const itemsList = items.map((item, ind) => {
+    return <AccordionItem key={ind} {...item} />;
+  });
+
   return (
     <div>
-      <AccordionTitle titleValue={props.title} setCollapsed={set} />
-      {!props.collapsed && <AccordionBody />}
+      <AccordionTitle titleValue={title} setCollapsed={collapsedHandler} />
+      {!collapsed && <ul>{itemsList}</ul>}
     </div>
   );
 }
+
 function AccordionTitle(props: AccordionTitleProps) {
-  const set = () => props.setCollapsed();
-  return <h3 onClick={set}>{props.titleValue}</h3>;
+  const { titleValue, setCollapsed } = props;
+  const collapsedHandler = () => setCollapsed();
+
+  return <h3 onClick={collapsedHandler}>{titleValue}</h3>;
 }
-function AccordionBody() {
-  return (
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-    </ul>
-  );
+
+function AccordionItem({ name }: ItemType) {
+  return <li>{name}</li>;
 }
