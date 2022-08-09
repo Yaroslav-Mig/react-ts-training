@@ -7,6 +7,7 @@ import { Rating, RatingValue } from './components/rating/Rating';
 import { RatingUncontrolled } from './components/rating/RatingUncontrolled';
 import { OnOff } from './components/OnOff/OnOffControl';
 import { OnOffUncontrolled } from './components/OnOff/OnOffUncontrolled';
+import { Select } from './components/select/Select';
 
 function App() {
   const [ratingValue, setRatingValue] = useState<RatingValue>(0);
@@ -21,10 +22,17 @@ function App() {
   ];
   const filmList = [
     { id: '1', name: 'Harry Potter' },
-		{ id: '2', name: 'Green mile' },
+    { id: '2', name: 'Green mile' },
     { id: '3', name: 'Snatch' },
     { id: '4', name: 'Shot caller' },
     { id: '5', name: 'Fargo' },
+  ];
+  const petsList = [
+    { id: '1', name: 'Dog' },
+    { id: '2', name: 'Cat' },
+    { id: '3', name: 'Fish' },
+    { id: '4', name: 'Parrot' },
+    { id: '5', name: 'Rodent' },
   ];
 
   return (
@@ -36,6 +44,7 @@ function App() {
       <RatingUncontrolled />
       <AccordionUncontrolled title='Films' items={filmList} />
       <OnOffUncontrolled />
+      <Select items={petsList} />
     </div>
   );
 }
