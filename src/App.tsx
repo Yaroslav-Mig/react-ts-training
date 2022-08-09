@@ -7,7 +7,7 @@ import { Rating, RatingValue } from './components/rating/Rating';
 import { RatingUncontrolled } from './components/rating/RatingUncontrolled';
 import { OnOff } from './components/OnOff/OnOffControl';
 import { OnOffUncontrolled } from './components/OnOff/OnOffUncontrolled';
-import { Select } from './components/select/Select';
+import { Select, SelectHover } from './components/select/Select';
 
 function App() {
   const [ratingValue, setRatingValue] = useState<RatingValue>(0);
@@ -44,7 +44,8 @@ function App() {
       <RatingUncontrolled />
       <AccordionUncontrolled title='Films' items={filmList} />
       <OnOffUncontrolled />
-      <Select items={petsList} />
+			<Select items={petsList} />
+			<SelectHover items={petsList}/>
     </div>
   );
 }

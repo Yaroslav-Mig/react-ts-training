@@ -1,10 +1,10 @@
 import React from 'react';
-import { Select } from './Select';
+import { Select, SelectHover } from './Select';
 import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Select',
-  component: Select,
+	component: Select,
 };
 
 const petsList = [
@@ -20,3 +20,8 @@ const callback = action('choose option');
 export const SelectConditionalRendering = () => {
   return <Select items={petsList} onChange={callback} />;
 };
+
+export const SelectShowWithHover = () => {
+  return <SelectHover items={petsList} onChange={callback} />;
+};
+
