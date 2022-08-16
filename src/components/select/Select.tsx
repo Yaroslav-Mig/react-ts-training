@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { KeyboardEvent, useEffect, useState } from 'react';
 import st from './Select.module.css';
 import { ItemType } from '../accordion/Accordion';
 
@@ -11,11 +11,40 @@ export const Select = (props: SelectProps) => {
   const { items, onChange } = props;
 
   const [value, setValue] = useState<string>('Choose an option');
-  const [toggle, setToggle] = useState<boolean>(true);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [hoveredValue, setHoveredValue] = useState<string>('');
+
+  useEffect(() => {
+    setHoveredValue(value);
+  }, [value]);
 
   const selectItem = items.find((item) => item.name === value);
+  const hoveredItem = items.find((item) => item.name === hoveredValue);
 
   const toogleHandler = (): void => setToggle(!toggle);
+
+  const onKeyUpHandler = (e: KeyboardEvent<HTMLParagraphElement>): void => {
+    const key: string = e.key;
+
+    if (key === 'ArrowUp' || key === 'ArrowDown') {
+      items.forEach((el, ind, arr): void => {
+        if (el.id === hoveredItem?.id) {
+          const item = key === 'ArrowUp' ? arr[ind - 1] : arr[ind + 1];
+          if (item) {
+            setValue(item.name);
+            return;
+          }
+        }
+      });
+      if (!selectItem) {
+        setValue(items[0].name);
+      }
+    }
+
+    if (key === 'Enter' || key === 'Escape') {
+      setToggle(false);
+    }
+  };
 
   const chooseValueHadler = (name: string): void => {
     onChange && onChange(name);
@@ -24,10 +53,15 @@ export const Select = (props: SelectProps) => {
   };
 
   const itemsList = items.map((item) => {
-    const stylesItem = selectItem?.id === item.id ? `${st.item} ${st.active}` : `${st.item}`;
+    const stylesItem = hoveredItem?.id === item.id ? `${st.item} ${st.active}` : `${st.item}`;
 
     return (
-      <li key={item.id} className={stylesItem} onClick={() => chooseValueHadler(item.name)}>
+      <li
+        key={item.id}
+        className={stylesItem}
+        onClick={() => chooseValueHadler(item.name)}
+        onMouseEnter={() => setHoveredValue(item.name)}
+      >
         {item.name}
       </li>
     );
@@ -35,7 +69,13 @@ export const Select = (props: SelectProps) => {
 
   return (
     <div className={st.wrapper}>
-      <p className={st.text} title='Click to choose an option' onClick={toogleHandler}>
+      <p
+        className={st.text}
+        title='Click to choose an option'
+        tabIndex={0}
+        onClick={toogleHandler}
+        onKeyUp={onKeyUpHandler}
+      >
         {value}
       </p>
       {toggle && <ul>{itemsList}</ul>}
@@ -43,6 +83,7 @@ export const Select = (props: SelectProps) => {
   );
 };
 
+//TODO: with hover selector
 export const SelectHover = (props: SelectProps) => {
   const { items, onChange } = props;
 
@@ -67,10 +108,10 @@ export const SelectHover = (props: SelectProps) => {
 
   return (
     <div className={st.wrapper}>
-      <p className={st.text} title='Click to choose an option'>
+      <div className={st.text} title='Click to choose an option'>
         {value}
         <ul className={st.list}>{itemsList}</ul>
-      </p>
+      </div>
     </div>
   );
 };

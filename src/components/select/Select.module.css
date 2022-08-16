@@ -45,7 +45,7 @@
   top: 100%;
   left: 0;
   z-index: 10;
-	width: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -69,7 +69,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   transition: 0.3s linear;
 }
-.item:hover {
+.list > .item:hover {
   padding: 8px 10px;
   color: #29838c;
   background-color: #f0f1f1;
