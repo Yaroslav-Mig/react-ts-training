@@ -18,7 +18,6 @@ type AccordionTitleProps = {
 export function Accordion(props: AccordionProps) {
   const { title, collapsed, items, setCollapsed } = props;
   const collapsedHandler = () => setCollapsed(!collapsed);
-  console.dir(items);
 
   const itemsList = items.map((item, ind) => {
     return <AccordionItem key={ind} {...item} />;

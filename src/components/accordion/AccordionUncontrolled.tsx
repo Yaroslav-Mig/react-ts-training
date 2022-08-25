@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { ItemType } from './Accordion';
+import { accordionReducer, changeCollapsedAC } from './Accordion-reducer';
 
 type AccordionProps = {
   title: string;
@@ -16,17 +17,18 @@ type AccordionBodyProps = {
 
 export function AccordionUncontrolled(props: AccordionProps) {
   const { title, items, changeCollapsed } = props;
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+
+  const [state, dispatch] = useReducer(accordionReducer, { collapsed: true });
 
   const collapseHandler = () => {
-    changeCollapsed && changeCollapsed(!collapsed);
-    setCollapsed(!collapsed);
+    changeCollapsed && changeCollapsed(!state.collapsed);
+    dispatch(changeCollapsedAC(state.collapsed));
   };
 
   return (
     <div>
       <AccordionTitle titleValue={title} changeCollapsed={collapseHandler} />
-      {!collapsed && <AccordionBody items={items} />}
+      {!state.collapsed && <AccordionBody items={items} />}
     </div>
   );
 }
