@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { RatingValue } from './Rating';
 
 type RatingPropsType = {
@@ -10,10 +10,10 @@ type StarProps = {
   setRating: () => void;
 };
 
-export function RatingUncontrolled(props: RatingPropsType) {
+export const RatingUncontrolled = memo((props: RatingPropsType) => {
   const { value: defaultValue, onChange } = props;
   let [value, setValue] = useState<RatingValue>(0);
-
+	console.log('rating2 body');
   const setRatingHandler = (value: RatingValue): (() => void) => {
     if (onChange) {
       return () => onChange(value);
@@ -24,7 +24,7 @@ export function RatingUncontrolled(props: RatingPropsType) {
   if (defaultValue !== undefined) {
     value = defaultValue;
   }
-  return (
+	return (
     <div>
       <Star setRating={setRatingHandler(1)} selected={value > 0} />
       <Star setRating={setRatingHandler(2)} selected={value > 1} />
@@ -33,8 +33,10 @@ export function RatingUncontrolled(props: RatingPropsType) {
       <Star setRating={setRatingHandler(5)} selected={value > 4} />
     </div>
   );
-}
-function Star(props: StarProps) {
+});
+
+const Star = memo((props: StarProps) => {
+	console.log('rating2 item');
   const setRating = () => props.setRating();
   return <span onClick={setRating}>{props.selected ? <b>Star </b> : 'Star '}</span>;
-}
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { styles } from './OnOffStyle';
 
 type PropsType = {
@@ -6,8 +6,8 @@ type PropsType = {
   setStatus: (value: boolean) => void;
 };
 
-export function OnOff({ status, setStatus }: PropsType) {
-
+export const OnOff = memo(({ status, setStatus }: PropsType) => {
+  console.log('toggle');
   const onChange = () => setStatus(true);
   const offChangeHandler = () => setStatus(false);
 
@@ -22,4 +22,4 @@ export function OnOff({ status, setStatus }: PropsType) {
       <div style={styles.Indicator(status)}></div>
     </div>
   );
-}
+});

@@ -8,6 +8,7 @@ import { RatingUncontrolled } from './components/rating/RatingUncontrolled';
 import { OnOff } from './components/OnOff/OnOffControl';
 import { OnOffUncontrolled } from './components/OnOff/OnOffUncontrolled';
 import { Select, SelectHover } from './components/select/Select';
+import { ReactMemo } from './components/memo/ReactMemo';
 
 function App() {
   const [ratingValue, setRatingValue] = useState<RatingValue>(0);
@@ -45,7 +46,8 @@ function App() {
       <AccordionUncontrolled title='Films' items={filmList} />
       <OnOffUncontrolled />
 			<Select items={petsList} />
-			<SelectHover items={petsList}/>
+			<SelectHover items={petsList} />
+			<ReactMemo/>
     </div>
   );
 }

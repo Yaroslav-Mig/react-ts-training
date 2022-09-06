@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 export type ItemType = {
   id: string;
@@ -15,10 +15,10 @@ type AccordionTitleProps = {
   setCollapsed: () => void;
 };
 
-export function Accordion(props: AccordionProps) {
+export const Accordion = memo((props: AccordionProps) => {
   const { title, collapsed, items, setCollapsed } = props;
   const collapsedHandler = () => setCollapsed(!collapsed);
-
+  console.log('accordion');
   const itemsList = items.map((item, ind) => {
     return <AccordionItem key={ind} {...item} />;
   });
@@ -29,15 +29,16 @@ export function Accordion(props: AccordionProps) {
       {!collapsed && <ul>{itemsList}</ul>}
     </div>
   );
-}
+});
 
-function AccordionTitle(props: AccordionTitleProps) {
+const AccordionTitle = memo((props: AccordionTitleProps) => {
   const { titleValue, setCollapsed } = props;
   const collapsedHandler = () => setCollapsed();
-
+  console.log('accordion title');
   return <h3 onClick={collapsedHandler}>{titleValue}</h3>;
-}
+});
 
-function AccordionItem({ name }: ItemType) {
+const AccordionItem = memo(({ name }: ItemType) => {
+  console.log('accordion item');
   return <li>{name}</li>;
-}
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 export type RatingValue = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -13,7 +13,8 @@ type StarProps = {
   onClick: (value: RatingValue) => void;
 };
 
-export function Rating(props: RatingProps) {
+export const Rating = memo((props: RatingProps) => {
+	console.log('rating body');
   return (
     <div>
       <Star value={1} selected={props.value > 0} onClick={props.onClick} />
@@ -23,9 +24,10 @@ export function Rating(props: RatingProps) {
       <Star value={5} selected={props.value > 4} onClick={props.onClick} />
     </div>
   );
-}
+});
 
-function Star(props: StarProps) {
+const Star = memo((props: StarProps) => {
+	console.log('rating item');
   const setRating = () => props.onClick(props.value);
   return <span onClick={setRating}>{props.selected ? <b>Star </b> : 'Star '}</span>;
-}
+});
