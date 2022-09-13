@@ -49,7 +49,7 @@ function App() {
       <Select items={petsList} />
       <SelectHover items={petsList} />
       <ReactMemo />
-      <ReactUseMemo />
+      <ReactUseMemo /> 
     </div>
   );
 }
