@@ -1,4 +1,4 @@
-import React, { memo, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import { ItemType } from './Accordion';
 import { accordionReducer, changeCollapsedAC } from './Accordion-reducer';
 
@@ -28,10 +28,10 @@ const AccordionBody = ({ items }: AccordionBodyProps) => {
   return <ul>{itemsList}</ul>;
 };
 
-const AccordionTitleMemoized = memo(AccordionTitle);
-const AccordionBodyMemoized = memo(AccordionBody);
+const AccordionTitleMemoized = React.memo(AccordionTitle);
+const AccordionBodyMemoized = React.memo(AccordionBody);
 
-export const AccordionUncontrolled = memo((props: AccordionProps) => {
+const AccordionUncontrolled = (props: AccordionProps) => {
   const { title, items, changeCollapsed } = props;
   console.log('accordion2');
   const [state, dispatch] = useReducer(accordionReducer, { collapsed: true });
@@ -47,5 +47,6 @@ export const AccordionUncontrolled = memo((props: AccordionProps) => {
       {!state.collapsed && <AccordionBodyMemoized items={items} />}
     </div>
   );
-});
+};
 
+export default React.memo(AccordionUncontrolled);

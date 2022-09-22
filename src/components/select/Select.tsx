@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, memo, useEffect, useState } from 'react';
+import React, { KeyboardEvent, useEffect, useState } from 'react';
 import st from './Select.module.css';
 import { ItemType } from '../accordion/Accordion';
 
@@ -7,9 +7,9 @@ type SelectProps = {
   onChange?: (name: string) => void;
 };
 
-export const Select = memo((props: SelectProps) => {
+const Select = (props: SelectProps) => {
   const { items, onChange } = props;
-	console.log('select');
+  console.log('select');
   const [value, setValue] = useState<string>('Choose an option');
   const [toggle, setToggle] = useState<boolean>(false);
   const [hoveredValue, setHoveredValue] = useState<string>('');
@@ -81,12 +81,13 @@ export const Select = memo((props: SelectProps) => {
       {toggle && <ul>{itemsList}</ul>}
     </div>
   );
-});
+};
+export default React.memo(Select);
 
 //TODO: with hover selector
-export const SelectHover = memo((props: SelectProps) => {
+const SelectHover = (props: SelectProps) => {
   const { items, onChange } = props;
-	console.log('select hover');
+  console.log('select hover');
 
   const [value, setValue] = useState<string>('Choose an option');
 
@@ -115,4 +116,6 @@ export const SelectHover = memo((props: SelectProps) => {
       </div>
     </div>
   );
-});
+};
+
+export const SelectHoverMemo = React.memo(SelectHover);

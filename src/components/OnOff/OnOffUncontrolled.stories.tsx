@@ -1,5 +1,5 @@
 import React from 'react';
-import { OnOffUncontrolled } from './OnOffUncontrolled';
+import OnOffUncontrolled from './OnOffUncontrolled';
 import { action } from '@storybook/addon-actions';
 
 export default {

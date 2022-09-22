@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { styles } from './OnOffStyle';
 
 type PropsType = {
@@ -6,7 +6,7 @@ type PropsType = {
   setToggle?: (value: boolean) => void;
 };
 
-export const OnOffUncontrolled = memo((props: PropsType) => {
+const OnOffUncontrolled = (props: PropsType) => {
   const { toggle, setToggle } = props;
   const [status, setStatus] = useState<boolean>(toggle ?? false);
   console.log('toggle2');
@@ -29,4 +29,6 @@ export const OnOffUncontrolled = memo((props: PropsType) => {
       <div style={styles.Indicator(status)}></div>
     </div>
   );
-});
+};
+
+export default React.memo(OnOffUncontrolled);

@@ -14,10 +14,10 @@ const Users = ({ users }: { users: string[] }) => {
   return <ul>{mappedUsers}</ul>;
 };
 
-const MemoCounter = React.memo(Counter);
-const MemoUsers = React.memo(Users);
+const CounterMemo = React.memo(Counter);
+const UsersMemo = React.memo(Users);
 
-export const ReactMemo = () => {
+const ReactMemo = () => {
   const [count, setCount] = useState<number>(0);
   const [users, setUsers] = useState<string[]>(['Anna', 'Bob', 'Alex']);
 
@@ -27,7 +27,7 @@ export const ReactMemo = () => {
     setUsers(newUsers);
   };
 
-  const filterUsers = React.useMemo(() => {
+  const filteredUsers = React.useMemo(() => {
     return users.filter((user) => user.toLowerCase().includes('a'));
   }, [users]);
 
@@ -35,10 +35,12 @@ export const ReactMemo = () => {
 
   return (
     <>
-      <MemoCounter count={count} />
+      <CounterMemo count={count} />
       <button onClick={addCounterHandler}>+</button>
-      <MemoUsers users={filterUsers} />
+      <UsersMemo users={filteredUsers} />
       <button onClick={addUserHandler}>add user</button>
     </>
   );
 };
+
+export default React.memo(ReactMemo);

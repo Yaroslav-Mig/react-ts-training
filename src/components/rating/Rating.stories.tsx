@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Rating, RatingValue } from './Rating';
+import Rating, { RatingValue } from './Rating';
 
 export default {
   title: 'Rating',

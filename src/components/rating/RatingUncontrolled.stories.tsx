@@ -1,5 +1,5 @@
 import React from 'react';
-import { RatingUncontrolled } from './RatingUncontrolled';
+import RatingUncontrolled from './RatingUncontrolled';
 import { action } from '@storybook/addon-actions';
 
 export default {

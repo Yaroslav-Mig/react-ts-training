@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, SelectHover } from './Select';
+import Select, { SelectHoverMemo as SelectHover } from './Select';
 import { action } from '@storybook/addon-actions';
 
 export default {

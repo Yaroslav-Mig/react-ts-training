@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { AccordionUncontrolled } from './AccordionUncontrolled';
+import AccordionUncontrolled from './AccordionUncontrolled';
 
 export default {
   title: 'AccordionUncontrolled',

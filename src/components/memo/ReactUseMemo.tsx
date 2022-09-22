@@ -21,13 +21,14 @@ const factorial = (n: number): number => {
   return result;
 };
 
-export const ReactUseMemo = () => {
+const ReactUseMemo = () => {
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
 
-  const resultX = useMemo(() => factorialDelay(x),[x]);
-  const resultY = useMemo(() => factorial(y),[y]);
+  const resultX = useMemo(() => factorialDelay(x), [x]);
+  const resultY = useMemo(() => factorial(y), [y]);
 
+  console.log('ReactUseMemo');
   return (
     <form>
       <input type='number' value={x} onChange={(e) => setX(Number(e.currentTarget.value))} />
@@ -37,3 +38,5 @@ export const ReactUseMemo = () => {
     </form>
   );
 };
+
+export default React.memo(ReactUseMemo);

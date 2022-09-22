@@ -1,9 +1,12 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 type PageTitleProps = {
   title: string;
 };
 
-export const PageTitle = memo((props: PageTitleProps) => {
+const PageTitle = (props: PageTitleProps) => {
+  console.log('PageTitle');
   return <h1>{props.title}</h1>;
-});
+};
+
+export default React.memo(PageTitle);
