@@ -10,6 +10,7 @@ import OnOffUncontrolled from './components/OnOff/OnOffUncontrolled';
 import Select, { SelectHoverMemo as SelectHover } from './components/select/Select';
 import ReactMemo from './components/memo/ReactMemo';
 import ReactUseMemo from './components/memo/ReactUseMemo';
+import UseEffectDemo from './components/useEffect/useEffectDemo';
 
 const menuList = [
   { id: '1', name: 'French fries' },
@@ -50,7 +51,8 @@ function App() {
       <Select items={petsList} />
       <SelectHover items={petsList} />
       <ReactMemo />
-      <ReactUseMemo />
+			<ReactUseMemo />
+			<UseEffectDemo/>
     </div>
   );
 }
