@@ -11,6 +11,7 @@ import Select, { SelectHoverMemo as SelectHover } from './components/select/Sele
 import ReactMemo from './components/memo/ReactMemo';
 import ReactUseMemo from './components/memo/ReactUseMemo';
 import UseEffectDemo from './components/useEffect/useEffectDemo';
+import UseCallback from './components/memo/UseCallback';
 
 const menuList = [
   { id: '1', name: 'French fries' },
@@ -52,7 +53,8 @@ function App() {
       <SelectHover items={petsList} />
       <ReactMemo />
 			<ReactUseMemo />
-			<UseEffectDemo/>
+			<UseEffectDemo />
+			<UseCallback/>
     </div>
   );
 }
