@@ -12,6 +12,7 @@ import ReactMemo from './components/memo/ReactMemo';
 import ReactUseMemo from './components/memo/ReactUseMemo';
 import UseEffectDemo from './components/useEffect/useEffectDemo';
 import UseCallback from './components/memo/UseCallback';
+import UseRefDemo from './components/useRef/useRefDemo';
 
 const menuList = [
   { id: '1', name: 'French fries' },
@@ -54,7 +55,8 @@ function App() {
       <ReactMemo />
 			<ReactUseMemo />
 			<UseEffectDemo />
-			<UseCallback/>
+			<UseCallback />
+			<UseRefDemo/>
     </div>
   );
 }

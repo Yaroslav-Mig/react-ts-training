@@ -1,0 +1,11 @@
+.box {
+  border: 1px solid black;
+  margin: 10px;
+  text-align: center;
+  padding: 10px;
+  width: 300px;
+}
+
+.btn {
+  margin: 10px;
+}
