@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default {
   title: 'useEffectDemo',
@@ -12,36 +12,62 @@ export const SetTimeoutDemo = () => {
   useEffect(() => {
     console.log('useEffect + SetTimeout');
 
-		const setTimeoutID = setTimeout(() => {
-			console.log('setTimeOut expired after 3 sec');
-				setTime('3 sec passed');
-		}, 3000);
+    const setTimeoutID = setTimeout(() => {
+      console.log('setTimeOut expired after 3 sec');
+      setTime('3 sec passed');
+    }, 3000);
 
-		return () => clearTimeout(setTimeoutID);
-  },[]);
+    return () => clearTimeout(setTimeoutID);
+  }, []);
 
   return <p>text - {time}</p>;
 };
 
 export const SetIntervalDemo = () => {
-  const [time, setTime] = useState<number>(0);
   console.log('SetInterval');
 
-	useEffect(() => {
+  const [time, setTime] = useState<number>(0);
+  const intervalRef = useRef<any>();
+	const prevTime = useRef<any>();
+
+  const resetHandler = () => {
+    clearInterval(intervalRef.current);
+    setTime(0);
+  };
+
+  const stopHandler = () => {
+    clearInterval(intervalRef.current);
+  };
+
+  const continueHandler = () => {
+    setTime(prevTime.current + 1);
+  };
+
+  useEffect(() => {
     console.log('useEffect + SetInterval');
 
-    const setIntervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       console.log('tick: ' + time);
       setTime((prevState) => prevState + 1);
     }, 1000);
 
+		intervalRef.current = intervalId;
+		prevTime.current = time;
+
     return () => {
       console.log('reset: ' + time);
-      return clearInterval(setIntervalId);
+      return clearInterval(intervalId);
     };
-  }, []);
+  }, [time]);
 
-  return <p>timer - {time}</p>;
+  return (
+    <>
+      <p>timer - {time}</p>
+      <button onClick={resetHandler}>Reset</button>
+      <button onClick={stopHandler}>Stop</button>
+      <button onClick={continueHandler}>Continue</button>
+    </>
+  );
 };
 
 export const KeysTracker = () => {
