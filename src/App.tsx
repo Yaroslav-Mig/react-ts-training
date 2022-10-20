@@ -14,6 +14,7 @@ import UseEffectDemo from './components/useEffect/useEffectDemo';
 import UseCallback from './components/memo/UseCallback';
 import UseRefDemo from './components/useRef/useRefDemo';
 import UseContextDemo from './components/useContext/UseContextDemo';
+import UseReducerDemo from './components/useReducer/useReducerDemo';
 
 const menuList = [
   { id: '1', name: 'French fries' },
@@ -41,6 +42,7 @@ function App() {
   const [ratingValue, setRatingValue] = useState<RatingValue>(0);
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [toggle, setToggle] = useState(false);
+  const initWidth = 50;
   console.log('App');
   return (
     <div className='app'>
@@ -58,7 +60,8 @@ function App() {
 			<UseEffectDemo />
 			<UseCallback />
 			<UseRefDemo />
-			<UseContextDemo/>
+      <UseContextDemo />
+      <UseReducerDemo initWidth={initWidth} />
     </div>
   );
 }
