@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
+import { NameModifier, NamePrinter } from './Name';
+import ToolbarMemo from './Toolbar';
 
-type ContextType = {
+export type ContextType = {
   [theme: string]: string;
 };
 
@@ -15,8 +17,8 @@ const themes = {
   },
 };
 
-const ThemeContext = React.createContext<ContextType>(themes.light);
-const NameContext = React.createContext<any | null>(null);
+export const ThemeContext = React.createContext<ContextType>(themes.light);
+export const NameContext = React.createContext<any | null>(null);
 
 const UseContextDemo = () => {
   console.log('UseContextDemo');
@@ -39,35 +41,3 @@ const UseContextDemo = () => {
 };
 export default UseContextDemo;
 
-const Toolbar = () => {
-  console.log('Toolbar');
-  return (
-    <div>
-      <ThemedButton />
-    </div>
-  );
-};
-const ToolbarMemo = React.memo(Toolbar);
-
-const ThemedButton = () => {
-  console.log('ThemedButton');
-  const theme = useContext(ThemeContext);
-  return <button style={theme}>Круче только яйца!</button>;
-};
-
-const NameModifier = () => {
-  console.log('NameModifier');
-  const { name, updateName } = useContext(NameContext);
-  return (
-    <>
-      <label htmlFor='name'>Enter name</label>
-      <input id='name' type='text' value={name} onChange={updateName} />
-    </>
-  );
-};
-
-const NamePrinter = () => {
-  console.log('NamePrinter');
-  const { name } = useContext(NameContext);
-  return <p>My name is {name}</p>;
-};
