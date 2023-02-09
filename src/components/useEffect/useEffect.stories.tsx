@@ -24,45 +24,43 @@ export const SetTimeoutDemo = () => {
 };
 
 export const SetIntervalDemo = () => {
-  console.log('SetInterval');
+	console.log('SetInterval');
 
-  let [time, setTime] = useState<number>(0);
-  const intervalRefID = useRef<any>();
-  const prevRefTime = useRef<any>();
+	let [time, setTime] = useState<number>(0);
+  const refIntervalID = useRef<any>();
 
   const resetHandler = () => {
-    clearTimeout(intervalRefID.current);
-    setTime(0);
+    clearTimeout(refIntervalID.current);
+    setTime((prev) => (prev = 0));
   };
-
   const stopHandler = () => {
-    clearTimeout(intervalRefID.current);
+    clearTimeout(refIntervalID.current);
   };
-
   const continueHandler = () => {
-    setTime((prev) => (prev = prevRefTime.current + 0.1));
+    setTime((prev) => (prev = prev + 0.001));
   };
 
   useEffect(() => {
-    console.log('useEffect + SetInterval');
+		console.log('useEffect + SetInterval');
 
     const intervalId = setTimeout(() => {
-      console.log('tick: ' + time);
-      setTime((prevState) => prevState + 1);
-    }, 1000);
+			console.log('tick: ' + time);
+			setTime((prevState) => prevState + 0.1);
+    }, 100);
 
-    intervalRefID.current = intervalId;
-    prevRefTime.current = time;
+    refIntervalID.current = intervalId;
 
     return () => {
-      console.log('reset: ' + time);
+			console.log('reset: ' + time);
       return clearTimeout(intervalId);
     };
   }, [time]);
 
+	time = Number(time.toFixed(1));
+
   return (
     <>
-      <p>timer - {Math.trunc(time)}</p>
+      <p>timer - {time}</p>
       <button onClick={resetHandler}>Reset</button>
       <button onClick={stopHandler}>Stop</button>
       <button onClick={continueHandler}>Continue</button>
