@@ -26,43 +26,43 @@ export const SetTimeoutDemo = () => {
 export const SetIntervalDemo = () => {
   console.log('SetInterval');
 
-  const [time, setTime] = useState<number>(0);
-  const intervalRef = useRef<any>();
-	const prevTime = useRef<any>();
+  let [time, setTime] = useState<number>(0);
+  const intervalRefID = useRef<any>();
+  const prevRefTime = useRef<any>();
 
   const resetHandler = () => {
-    clearInterval(intervalRef.current);
+    clearTimeout(intervalRefID.current);
     setTime(0);
   };
 
   const stopHandler = () => {
-    clearInterval(intervalRef.current);
+    clearTimeout(intervalRefID.current);
   };
 
   const continueHandler = () => {
-    setTime(prevTime.current + 1);
+    setTime((prev) => (prev = prevRefTime.current + 0.1));
   };
 
   useEffect(() => {
     console.log('useEffect + SetInterval');
 
-    const intervalId = setInterval(() => {
+    const intervalId = setTimeout(() => {
       console.log('tick: ' + time);
       setTime((prevState) => prevState + 1);
     }, 1000);
 
-		intervalRef.current = intervalId;
-		prevTime.current = time;
+    intervalRefID.current = intervalId;
+    prevRefTime.current = time;
 
     return () => {
       console.log('reset: ' + time);
-      return clearInterval(intervalId);
+      return clearTimeout(intervalId);
     };
   }, [time]);
 
   return (
     <>
-      <p>timer - {time}</p>
+      <p>timer - {Math.trunc(time)}</p>
       <button onClick={resetHandler}>Reset</button>
       <button onClick={stopHandler}>Stop</button>
       <button onClick={continueHandler}>Continue</button>

@@ -4,6 +4,7 @@ import { accordionReducer, changeCollapsedAC } from './Accordion-reducer';
 
 type AccordionProps = {
   title: string;
+  collapsed?: boolean;
   items: Array<ItemType>;
   changeCollapsed?: (collapsed: boolean) => void;
 };
@@ -32,14 +33,18 @@ const AccordionTitleMemoized = React.memo(AccordionTitle);
 const AccordionBodyMemoized = React.memo(AccordionBody);
 
 const AccordionUncontrolled = (props: AccordionProps) => {
-  const { title, items, changeCollapsed } = props;
+  const { title, collapsed, items, changeCollapsed } = props;
   console.log('accordion2');
   const [state, dispatch] = useReducer(accordionReducer, { collapsed: true });
 
   const collapseHandler = () => {
     changeCollapsed && changeCollapsed(!state.collapsed);
     dispatch(changeCollapsedAC(state.collapsed));
-  };
+	};
+
+  if (collapsed !== undefined) {
+    state.collapsed = collapsed;
+	}
 
   return (
     <div>

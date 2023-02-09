@@ -8,10 +8,17 @@ export default {
 };
 
 const Callback = action('on or off clicked');
+
 export const OnMode = () => <OnOff status={true} setStatus={Callback} />;
 export const OffMode = () => <OnOff status={false} setStatus={Callback} />;
 
 export const ModeChange = () => {
-  const [value, setValue] = useState<boolean>(false);
-	return <OnOff status={value} setStatus={setValue}/>;
+	const [value, setValue] = useState<boolean>(false);
+
+	const changeHandler = (value: boolean) => {
+		Callback(value);
+		setValue(value)
+	}
+	
+	return <OnOff status={value} setStatus={changeHandler}/>;
 };

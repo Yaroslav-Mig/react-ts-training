@@ -15,17 +15,31 @@ const menuList = [
   { id: '4', name: 'Roast chicken' },
 ];
 
-const callback1 = action('collapsed');
-const callback2 = action('uncollapsed');
+const collapseCb = action('collapse list');
+const expandCb = action('expand list');
+const changeCb = action('collapse and expand list');
 
-export const Collapsed = () => (
-  <Accordion title='Menu' items={menuList} collapsed={true} setCollapsed={callback1} />
+export const collapseList = () => (
+  <Accordion title='Menu' items={menuList} collapsed={true} setCollapsed={collapseCb} />
 );
-export const UnCollapsed = () => (
-  <Accordion title='Menu' items={menuList} collapsed={false} setCollapsed={callback2} />
+export const expandList = () => (
+  <Accordion title='Menu' items={menuList} collapsed={false} setCollapsed={expandCb} />
 );
 
 export const ModeChange = () => {
   const [collapsed, setCollapsed] = useState(true);
-  return <Accordion title={'Menu'} items={menuList} collapsed={collapsed} setCollapsed={setCollapsed} />;
+
+  const collapsedHandler = (value: boolean) => {
+    changeCb(value);
+    setCollapsed(value);
+  };
+
+  return (
+    <Accordion
+      title={'Menu'}
+      items={menuList}
+      collapsed={collapsed}
+      setCollapsed={collapsedHandler}
+    />
+  );
 };
