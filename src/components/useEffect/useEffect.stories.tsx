@@ -24,9 +24,9 @@ export const SetTimeoutDemo = () => {
 };
 
 export const SetIntervalDemo = () => {
-	console.log('SetInterval');
+  console.log('start component');
 
-	let [time, setTime] = useState<number>(0);
+  let [time, setTime] = useState<number>(0);
   const refIntervalID = useRef<any>();
 
   const resetHandler = () => {
@@ -41,26 +41,27 @@ export const SetIntervalDemo = () => {
   };
 
   useEffect(() => {
-		console.log('useEffect + SetInterval');
+    console.log('useEffect');
 
     const intervalId = setTimeout(() => {
-			console.log('tick: ' + time);
-			setTime((prevState) => prevState + 0.1);
+      console.log('timeout: ' + time);
+      setTime((prevState) => Number((prevState + 0.1).toFixed(1)));
     }, 100);
 
     refIntervalID.current = intervalId;
 
     return () => {
-			console.log('reset: ' + time);
+      console.log('reset: ' + time);
       return clearTimeout(intervalId);
     };
   }, [time]);
 
-	time = Number(time.toFixed(1));
+  time = Number(time.toFixed(1));
 
   return (
     <>
       <p>timer - {time}</p>
+      {console.log('render ' + time)}
       <button onClick={resetHandler}>Reset</button>
       <button onClick={stopHandler}>Stop</button>
       <button onClick={continueHandler}>Continue</button>
