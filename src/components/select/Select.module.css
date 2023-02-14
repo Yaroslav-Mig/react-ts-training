@@ -4,6 +4,7 @@
   max-width: fit-content;
   box-sizing: border-box;
   padding: 20px 0px;
+	outline: none;
 }
 .wrapper > * {
   box-sizing: border-box;

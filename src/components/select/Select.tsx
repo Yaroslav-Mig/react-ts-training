@@ -18,12 +18,12 @@ const Select = (props: SelectProps) => {
     setHoveredValue(value);
   }, [value]);
 
-  const selectItem = items.find((item) => item.name === value);
-  const hoveredItem = items.find((item) => item.name === hoveredValue);
+  // const selectItem = items.find((item) => item.name === value) as ItemType;
+  const hoveredItem = items.find((item) => item.name === hoveredValue) as ItemType;
 
   const toogleHandler = (): void => setToggle(!toggle);
 
-  const onKeyUpHandler = (e: KeyboardEvent<HTMLParagraphElement>): void => {
+  const onKeyUpHandler = (e: KeyboardEvent<HTMLDivElement>): void => {
     const key: string = e.key;
 
     if (key === 'ArrowUp' || key === 'ArrowDown') {
@@ -36,7 +36,8 @@ const Select = (props: SelectProps) => {
           }
         }
       });
-      if (!selectItem) {
+
+      if (!hoveredItem) {
         setValue(items[0].name);
       }
     }
@@ -60,7 +61,7 @@ const Select = (props: SelectProps) => {
         key={item.id}
         className={stylesItem}
         onClick={() => chooseValueHadler(item.name)}
-        onMouseEnter={() => setHoveredValue(item.name)}
+				onMouseEnter={() => setHoveredValue(item.name)}
       >
         {item.name}
       </li>
@@ -68,14 +69,8 @@ const Select = (props: SelectProps) => {
   });
 
   return (
-    <div className={st.wrapper}>
-      <p
-        className={st.text}
-        title='Click to choose an option'
-        tabIndex={0}
-        onClick={toogleHandler}
-        onKeyUp={onKeyUpHandler}
-      >
+    <div className={st.wrapper} onKeyUp={onKeyUpHandler} tabIndex={1}>
+      <p className={st.text} title='Click to choose an option' onClick={toogleHandler}>
         {value}
       </p>
       {toggle && <ul>{itemsList}</ul>}
