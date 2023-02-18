@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 export default {
   title: 'useEffectDemo',
@@ -23,7 +23,7 @@ export const SetTimeoutDemo = () => {
   return <p>text - {time}</p>;
 };
 
-export const SetIntervalDemo = () => {
+export const StopWatch = () => {
   console.log('start component');
 
   let [time, setTime] = useState<number>(0);
@@ -87,4 +87,32 @@ export const KeysTracker = () => {
   }, [text]);
 
   return <p>typed text: {text}</p>;
+};
+
+export const CounterWithStep = () => {
+  const [count, setCount] = useState<number>(0);
+  const [step, setStep] = useState<number>(1);
+
+  const stepHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setStep(Number(e.target.value));
+	};
+
+	useEffect(() => {
+		const id = setInterval(() => {
+			setCount((prev) => prev + step)
+		}, 1000);
+
+		return () => {
+			clearInterval(id);
+		}
+	}, [step])
+
+
+  return (
+    <>
+			<h1>{count}</h1>
+			<br/>
+      <input type='number' min={1} max={10} step={1} value={step} onChange={stepHandler} />
+    </>
+  );
 };
